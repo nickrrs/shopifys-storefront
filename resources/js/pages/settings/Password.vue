@@ -15,7 +15,7 @@ import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbItems: BreadcrumbItem[] = [
     {
-        title: 'Password settings',
+        title: 'password settings',
         href: edit().url,
     },
 ];
@@ -58,56 +58,56 @@ const submit = async () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbItems">
-        <Head title="Password settings" />
+        <Head title="password settings" />
 
         <ToastContainer :toasts="toasts" />
 
-        <h1 class="sr-only">Password Settings</h1>
+        <h1 class="sr-only">password settings</h1>
 
         <SettingsLayout>
             <div class="space-y-6">
                 <Heading
                     variant="small"
-                    title="Update password"
-                    description="Ensure your account is using a long, random password to stay secure"
+                    title="update password"
+                    description="ensure your account is using a long, random password to stay secure"
                 />
 
                 <form class="space-y-6" @submit.prevent="submit">
                     <div class="grid gap-2">
-                        <Label for="current_password">Current password</Label>
+                        <Label for="current_password">current password</Label>
                         <Input
                             id="current_password"
                             v-model="currentPassword"
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="current-password"
-                            placeholder="Current password"
+                            placeholder="current password"
                             required
                         />
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="password">New password</Label>
+                        <Label for="password">new password</Label>
                         <Input
                             id="password"
                             v-model="password"
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="new-password"
-                            placeholder="New password"
+                            placeholder="new password"
                             required
                         />
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="password_confirmation">Confirm password</Label>
+                        <Label for="password_confirmation">confirm password</Label>
                         <Input
                             id="password_confirmation"
                             v-model="passwordConfirmation"
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="new-password"
-                            placeholder="Confirm password"
+                            placeholder="confirm password"
                             required
                         />
                     </div>
@@ -118,7 +118,7 @@ const submit = async () => {
                             :disabled="submitting"
                             data-test="update-password-button"
                         >
-                            Save password
+                            save password
                         </Button>
                     </div>
                 </form>
