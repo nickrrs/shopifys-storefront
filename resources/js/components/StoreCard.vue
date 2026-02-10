@@ -44,23 +44,23 @@ const formatDate = (dateString: string) => {
         :class="{ 'border-[#008060]/30': expanded }"
     >
         <div
-            class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50/50 transition-colors rounded-t-xl"
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 sm:p-5 cursor-pointer hover:bg-gray-50/50 transition-colors rounded-t-xl"
             @click="emit('toggleExpand')"
         >
             <div class="flex items-start gap-3 flex-1 min-w-0">
-                <div class="inline-flex items-center justify-center p-2.5 bg-[#008060]/10 rounded-lg shrink-0">
-                    <StoreIcon class="h-5 w-5 text-[#008060]" />
+                <div class="inline-flex items-center justify-center p-2 sm:p-2.5 bg-[#008060]/10 rounded-lg shrink-0">
+                    <StoreIcon class="h-4 w-4 sm:h-5 sm:w-5 text-[#008060]" />
                 </div>
                 <div class="min-w-0 flex-1">
                     <h3 class="text-sm font-semibold text-gray-900 truncate">
                         {{ store.name }}
                     </h3>
-                    <div class="mt-1 flex items-center gap-4">
+                    <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
                         <div class="flex items-center gap-1.5 text-xs text-gray-500">
                             <Globe class="h-3.5 w-3.5 shrink-0" />
-                            <span class="truncate">{{ store.shopifyDomain }}</span>
+                            <span class="truncate max-w-[140px] sm:max-w-none">{{ store.shopifyDomain }}</span>
                         </div>
-                        <div class="flex items-center gap-1.5 text-xs text-gray-400">
+                        <div class="hidden sm:flex items-center gap-1.5 text-xs text-gray-400">
                             <Calendar class="h-3.5 w-3.5 shrink-0" />
                             <span>{{ formatDate(store.connectedAt) }}</span>
                         </div>
@@ -72,19 +72,20 @@ const formatDate = (dateString: string) => {
                 </div>
             </div>
 
-            <div class="flex items-center gap-2 ml-4">
+            <div class="flex items-center gap-2 ml-auto sm:ml-4 shrink-0">
                 <span
                     v-if="store.syncing"
                     class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700"
                 >
                     <Loader2 class="h-3 w-3 animate-spin" />
-                    syncing
+                    <span class="hidden sm:inline">syncing</span>
                 </span>
                 <span
                     v-else
                     class="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700"
                 >
-                    connected
+                    <span class="hidden sm:inline">connected</span>
+                    <span class="sm:hidden">ok</span>
                 </span>
 
                 <button

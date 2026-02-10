@@ -90,19 +90,19 @@ const statusColor = (status: string) => {
             </div>
 
             <div data-scroll-container class="max-h-96 overflow-y-auto overflow-x-auto">
-                <table class="w-full text-sm">
+                <table class="w-full min-w-[500px] text-sm">
                     <thead class="sticky top-0 bg-white z-10">
                         <tr class="border-b border-gray-100 text-left">
-                            <th class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-3 sm:px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 title
                             </th>
-                            <th class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-3 sm:px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 price
                             </th>
-                            <th class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-3 sm:px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                                 inventory
                             </th>
-                            <th class="px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-3 sm:px-5 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 status
                             </th>
                         </tr>
@@ -113,16 +113,16 @@ const statusColor = (status: string) => {
                             :key="product.id"
                             class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
                         >
-                            <td class="px-5 py-3 font-medium text-gray-900 max-w-xs truncate">
+                            <td class="px-3 sm:px-5 py-3 font-medium text-gray-900 max-w-[180px] sm:max-w-xs truncate">
                                 {{ product.title }}
                             </td>
-                            <td class="px-5 py-3 text-gray-600">
+                            <td class="px-3 sm:px-5 py-3 text-gray-600 whitespace-nowrap">
                                 {{ formatPrice(product.price) }}
                             </td>
-                            <td class="px-5 py-3 text-gray-600">
+                            <td class="px-3 sm:px-5 py-3 text-gray-600 hidden sm:table-cell">
                                 {{ product.inventoryQuantity ?? '—' }}
                             </td>
-                            <td class="px-5 py-3">
+                            <td class="px-3 sm:px-5 py-3">
                                 <span
                                     :class="[
                                         'inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium',

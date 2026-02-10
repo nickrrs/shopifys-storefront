@@ -113,10 +113,10 @@ onMounted(() => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <ToastContainer :toasts="toasts" />
 
-        <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto p-6 bg-[#f1f2f3]">
-            <div class="flex items-center justify-between">
+        <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto p-4 sm:p-6 bg-[#f1f2f3]">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                    <h1 class="text-xl font-semibold text-gray-900">
+                    <h1 class="text-lg sm:text-xl font-semibold text-gray-900">
                         stores overview
                     </h1>
                     <p class="mt-1 text-sm text-gray-600">
@@ -125,7 +125,7 @@ onMounted(() => {
                 </div>
                 <button
                     type="button"
-                    class="inline-flex items-center rounded-lg bg-[#008060] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#006e52] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008060] transition-all duration-200 cursor-pointer"
+                    class="inline-flex items-center justify-center rounded-lg bg-[#008060] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#006e52] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#008060] transition-all duration-200 cursor-pointer w-full sm:w-auto"
                     @click="showConnectDialog = true"
                 >
                     <Plus class="mr-2 h-4 w-4" />
