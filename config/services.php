@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'shopify' => [
+        'api_version' => env('SHOPIFY_API_VERSION', '2026-01'),
+    ],
+
 ];
