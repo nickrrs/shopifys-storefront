@@ -1,0 +1,7 @@
+enum ProductStatus {
+    ACTIVE
+    DRAFT
+    PUBLISHED
+    ARCHIVED
+}
+

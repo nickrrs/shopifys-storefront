@@ -1,0 +1,4 @@
+extend type Query {
+    me: User @guard @field(resolver: "App\\GraphQL\\Queries\\Me@__invoke")
+}
+

@@ -1,0 +1,14 @@
+input UpdateProfileInput {
+    name: String!
+    email: String!
+}
+
+input UpdatePasswordInput {
+    current_password: String!
+    password: String!
+    password_confirmation: String!
+}
+
+input DeleteAccountInput {
+    password: String!
+}

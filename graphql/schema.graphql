@@ -1,20 +1,43 @@
+#import auth/*.graphql
+#import user/*.graphql
+#import store/*.graphql
+#import product/*.graphql
+
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
-type User {
-    "Unique primary key."
+
+type User @model(class: "App\\Models\\User") {
     id: ID!
-
-    "Non-unique name."
     name: String!
-
-    "Unique email address."
     email: String!
-
-    "When the email was verified."
-    email_verified_at: DateTime
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+    stores: [Store!]! @hasMany
 }
+
+type Store @model(class: "App\\Models\\Store") {
+    id: ID!
+    name: String!
+    shopifyDomain: String! @rename(attribute: "shopify_domain")
+    syncing: Boolean!
+    productsCount: Int! @rename(attribute: "products_count")
+    connectedAt: DateTime! @rename(attribute: "connected_at")
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+    products: [Product!]! @hasMany(type: CONNECTION, defaultCount: 10, maxCount: 50)
+}
+
+type Product @model(class: "App\\Models\\Product") {
+    id: ID!
+    store: Store! @belongsTo
+    title: String!
+    description: String
+    price: Float!
+    inventoryQuantity: Int @rename(attribute: "inventory_quantity")
+    status: ProductStatus!
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+type Query
+
+type Mutation

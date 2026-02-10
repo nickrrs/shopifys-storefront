@@ -1,0 +1,12 @@
+extend type Mutation {
+    register(input: RegisterInput!): AuthPayload
+        @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Register@__invoke")
+
+    login(input: LoginInput!): AuthPayload
+        @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Login@__invoke")
+
+    logout: Boolean!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\Auth\\Logout@__invoke")
+}
+

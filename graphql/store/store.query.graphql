@@ -1,0 +1,3 @@
+extend type Query {
+    myStores: [Store!]! @guard @field(resolver: "App\\GraphQL\\Queries\\MyStores@__invoke")
+}

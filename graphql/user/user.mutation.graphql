@@ -1,0 +1,13 @@
+extend type Mutation {
+    updateProfile(input: UpdateProfileInput!): User!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\User\\UpdateProfile@__invoke")
+
+    updatePassword(input: UpdatePasswordInput!): Boolean!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\User\\UpdatePassword@__invoke")
+
+    deleteAccount(input: DeleteAccountInput!): Boolean!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\User\\DeleteAccount@__invoke")
+}

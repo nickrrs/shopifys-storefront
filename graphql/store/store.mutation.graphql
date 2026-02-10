@@ -1,0 +1,13 @@
+extend type Mutation {
+    connectStore(input: ConnectStoreInput!): Store!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\Shopify\\ConnectStore@__invoke")
+
+    updateStore(id: ID!, input: UpdateStoreInput!): Store!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\Shopify\\UpdateStore@__invoke")
+
+    syncStoreProducts(storeId: ID!): Store!
+        @guard
+        @field(resolver: "App\\GraphQL\\Mutations\\Shopify\\SyncStoreProducts@__invoke")
+}

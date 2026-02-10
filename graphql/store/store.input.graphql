@@ -1,0 +1,9 @@
+input ConnectStoreInput {
+    name: String!
+    shopifyDomain: String!
+    accessToken: String!
+}
+
+input UpdateStoreInput {
+    name: String!
+}
