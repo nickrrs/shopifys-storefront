@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
+import { Store } from 'lucide-vue-next';
 </script>
 
 <template>
     <div
-        class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
+        class="flex aspect-square size-8 items-center justify-center rounded-md bg-[#008060] text-sidebar-primary-foreground"
     >
-        <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
+        <Store class="h-4 w-4 text-white" />
     </div>
     <div class="ml-1 grid flex-1 text-left text-sm">
         <span class="mb-0.5 truncate leading-tight font-semibold"
-            >Laravel Starter Kit</span
+            >shopify's storefront</span
         >
     </div>
 </template>
