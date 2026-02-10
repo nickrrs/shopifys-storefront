@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { Form } from '@inertiajs/vue3';
-import { useTemplateRef } from 'vue';
-import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
+import { ref } from 'vue';
 import Heading from '@/components/Heading.vue';
-import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -17,96 +14,107 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useDeleteAccount } from '@/composables/useDeleteAccount';
+import { useToast } from '@/composables/useToast';
 
-const passwordInput = useTemplateRef('passwordInput');
+const password = ref('');
+const dialogOpen = ref(false);
+
+const { submitting, deleteAccount } = useDeleteAccount();
+const { showError } = useToast();
+
+const handleDelete = async () => {
+    try {
+        await deleteAccount(password.value);
+
+        window.location.href = '/';
+    } catch (error) {
+        const message =
+            error instanceof Error
+                ? error.message
+                : 'Unexpected error when deleting account.';
+
+        showError(message);
+        password.value = '';
+    }
+};
+
+const handleCancel = () => {
+    password.value = '';
+    dialogOpen.value = false;
+};
 </script>
 
 <template>
     <div class="space-y-6">
         <Heading
             variant="small"
-            title="Delete account"
+            title="delete account"
             description="Delete your account and all of its resources"
         />
         <div
             class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
         >
             <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
+                <p class="font-medium">warning</p>
                 <p class="text-sm">
-                    Please proceed with caution, this cannot be undone.
+                    please proceed with caution, this cannot be undone.
                 </p>
             </div>
-            <Dialog>
+            <Dialog v-model:open="dialogOpen">
                 <DialogTrigger as-child>
-                    <Button variant="destructive" data-test="delete-user-button"
-                        >Delete account</Button
-                    >
+                    <Button variant="destructive" data-test="delete-user-button">
+                        delete account
+                    </Button>
                 </DialogTrigger>
                 <DialogContent>
-                    <Form
-                        v-bind="ProfileController.destroy.form()"
-                        reset-on-success
-                        @error="() => passwordInput?.$el?.focus()"
-                        :options="{
-                            preserveScroll: true,
-                        }"
-                        class="space-y-6"
-                        v-slot="{ errors, processing, reset, clearErrors }"
-                    >
+                    <form class="space-y-6" @submit.prevent="handleDelete">
                         <DialogHeader class="space-y-3">
-                            <DialogTitle
-                                >Are you sure you want to delete your
-                                account?</DialogTitle
-                            >
+                            <DialogTitle>
+                                are you sure you want to delete your account?
+                            </DialogTitle>
                             <DialogDescription>
-                                Once your account is deleted, all of its
-                                resources and data will also be permanently
-                                deleted. Please enter your password to confirm
-                                you would like to permanently delete your
-                                account.
+                                once your account is deleted, all of its resources and
+                                data will also be permanently deleted. please enter your
+                                password to confirm you would like to permanently delete
+                                your account.
                             </DialogDescription>
                         </DialogHeader>
 
                         <div class="grid gap-2">
-                            <Label for="password" class="sr-only"
-                                >Password</Label
-                            >
+                            <Label for="delete-password" class="sr-only">
+                                password
+                            </Label>
                             <Input
-                                id="password"
+                                id="delete-password"
+                                v-model="password"
                                 type="password"
-                                name="password"
-                                ref="passwordInput"
-                                placeholder="Password"
+                                placeholder="password"
+                                required
                             />
-                            <InputError :message="errors.password" />
                         </div>
 
                         <DialogFooter class="gap-2">
                             <DialogClose as-child>
                                 <Button
+                                    type="button"
                                     variant="secondary"
-                                    @click="
-                                        () => {
-                                            clearErrors();
-                                            reset();
-                                        }
-                                    "
+                                    @click="handleCancel"
                                 >
-                                    Cancel
+                                    cancel
                                 </Button>
                             </DialogClose>
 
                             <Button
                                 type="submit"
                                 variant="destructive"
-                                :disabled="processing"
+                                :disabled="submitting"
                                 data-test="confirm-delete-user-button"
                             >
-                                Delete account
+                                delete account
                             </Button>
                         </DialogFooter>
-                    </Form>
+                    </form>
                 </DialogContent>
             </Dialog>
         </div>
