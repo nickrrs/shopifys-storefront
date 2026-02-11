@@ -1,4 +1,4 @@
-# Shopify Storefront Integration
+# Shopify Storefront
 
 A modern Laravel + Vue.js application for managing and synchronizing Shopify stores and products through a GraphQL API.
 
