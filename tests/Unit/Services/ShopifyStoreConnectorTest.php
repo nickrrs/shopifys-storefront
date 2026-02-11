@@ -18,7 +18,7 @@ it('creates a new store when connecting successfully', function () {
     ]);
 
     $user = User::factory()->create();
-    $connector = new ShopifyStoreConnector();
+    $connector = new ShopifyStoreConnector;
 
     $store = $connector->connect($user, 'My Store', 'test-shop.myshopify.com', 'shpat_abc123');
 
@@ -47,7 +47,7 @@ it('uses resolved domain from shopify response', function () {
     ]);
 
     $user = User::factory()->create();
-    $connector = new ShopifyStoreConnector();
+    $connector = new ShopifyStoreConnector;
 
     $store = $connector->connect($user, 'My Store', 'custom-domain.com', 'shpat_abc123');
 
@@ -74,7 +74,7 @@ it('updates existing store when domain already exists', function () {
         'name' => 'Old Name',
     ]);
 
-    $connector = new ShopifyStoreConnector();
+    $connector = new ShopifyStoreConnector;
     $store = $connector->connect($user, 'New Name', 'existing.myshopify.com', 'shpat_new_token');
 
     expect($store->id)->toBe($existingStore->id);
@@ -89,7 +89,7 @@ it('throws exception when shopify api fails', function () {
     ]);
 
     $user = User::factory()->create();
-    $connector = new ShopifyStoreConnector();
+    $connector = new ShopifyStoreConnector;
 
     expect(fn () => $connector->connect($user, 'My Store', 'bad-domain.com', 'invalid_token'))
         ->toThrow(RuntimeException::class);

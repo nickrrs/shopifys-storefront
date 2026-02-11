@@ -10,8 +10,7 @@ class Login
 {
     public function __construct(
         protected StatefulGuard $guard,
-    ) {
-    }
+    ) {}
 
     public function __invoke(null $_, array $args): array
     {

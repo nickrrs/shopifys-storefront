@@ -11,8 +11,7 @@ class Logout
     public function __construct(
         protected StatefulGuard $guard,
         protected Request $request,
-    ) {
-    }
+    ) {}
 
     public function __invoke(null $_, array $args): bool
     {

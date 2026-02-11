@@ -25,4 +25,3 @@ class MyStores
         return $user->stores()->withCount('products')->get();
     }
 }
-

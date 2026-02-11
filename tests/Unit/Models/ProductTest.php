@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Product;
-use App\Models\Store;
 use Illuminate\Support\Facades\DB;
 
 it('uppercases status on get', function () {

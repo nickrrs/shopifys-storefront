@@ -58,4 +58,3 @@ it('fails login with wrong password', function () {
     $response->assertJsonStructure(['errors']);
     test()->assertGuest();
 });
-

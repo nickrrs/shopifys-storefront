@@ -102,4 +102,3 @@ it('throws RuntimeException on GraphQL errors', function () {
     expect(fn () => $client->request('query { shop { name } }'))
         ->toThrow(RuntimeException::class);
 });
-
