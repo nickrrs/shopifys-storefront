@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { Loader2, Package, RefreshCw } from 'lucide-vue-next';
+import { computed } from 'vue';
 import { useInfiniteScroll } from '@/composables/useInfiniteScroll';
-import type { StoreItem, ProductItem } from '@/composables/useStores';
+import type { StoreItem } from '@/composables/useStores';
 
 const props = defineProps<{
     store: StoreItem;

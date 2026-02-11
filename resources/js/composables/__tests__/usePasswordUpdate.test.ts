@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { usePasswordUpdate } from '../usePasswordUpdate';
 
 vi.mock('@/lib/graphql', () => ({
     requestWrapper: vi.fn(),
 }));
 
 import { requestWrapper } from '@/lib/graphql';
+import { usePasswordUpdate } from '../usePasswordUpdate';
 
 const mockRequest = vi.mocked(requestWrapper);
 

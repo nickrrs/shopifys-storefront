@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import {
     Store as StoreIcon,
     Globe,
@@ -11,6 +10,7 @@ import {
     ChevronUp,
     Package,
 } from 'lucide-vue-next';
+import { computed } from 'vue';
 import ProductTable from '@/components/ProductTable.vue';
 import type { StoreItem } from '@/composables/useStores';
 

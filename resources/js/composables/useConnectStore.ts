@@ -1,6 +1,6 @@
 import { ref } from 'vue';
-import { requestWrapper } from '@/lib/graphql';
 import type { StoreItem } from '@/composables/useStores';
+import { requestWrapper } from '@/lib/graphql';
 
 type ConnectStoreInput = {
     name: string;

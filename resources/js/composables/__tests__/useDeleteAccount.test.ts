@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useDeleteAccount } from '../useDeleteAccount';
 
 vi.mock('@/lib/graphql', () => ({
     requestWrapper: vi.fn(),
 }));
 
 import { requestWrapper } from '@/lib/graphql';
+import { useDeleteAccount } from '../useDeleteAccount';
 
 const mockRequest = vi.mocked(requestWrapper);
 

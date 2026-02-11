@@ -12,11 +12,9 @@ import { useAuthLogout } from '@/composables/useAuthLogout';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';
 
-type Props = {
+const props = defineProps<{
     user: User;
-};
-
-const props = defineProps<Props>();
+}>();
 
 const { logout } = useAuthLogout();
 </script>
@@ -24,7 +22,7 @@ const { logout } = useAuthLogout();
 <template>
     <DropdownMenuLabel class="p-0 font-normal">
         <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <UserInfo :user="user" :show-email="true" />
+            <UserInfo :user="props.user" :show-email="true" />
         </div>
     </DropdownMenuLabel>
     <DropdownMenuSeparator />

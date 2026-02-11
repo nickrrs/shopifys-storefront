@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useAuthLogout } from '../useAuthLogout';
 
 vi.mock('@/lib/graphql', () => ({
     requestWrapper: vi.fn(),
 }));
 
 import { requestWrapper } from '@/lib/graphql';
+import { useAuthLogout } from '../useAuthLogout';
 
 const mockRequest = vi.mocked(requestWrapper);
 

@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useConnectStore } from '../useConnectStore';
 
 vi.mock('@/lib/graphql', () => ({
     requestWrapper: vi.fn(),
 }));
 
 import { requestWrapper } from '@/lib/graphql';
+import { useConnectStore } from '../useConnectStore';
 
 const mockRequest = vi.mocked(requestWrapper);
 

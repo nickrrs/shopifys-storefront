@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import { Plus, Store as StoreIcon, Loader2 } from 'lucide-vue-next';
-import AppLayout from '@/layouts/AppLayout.vue';
-import ToastContainer from '@/components/ToastContainer.vue';
+import { ref, onMounted } from 'vue';
 import ConnectStoreDialog from '@/components/ConnectStoreDialog.vue';
 import EditStoreDialog from '@/components/EditStoreDialog.vue';
 import StoreCard from '@/components/StoreCard.vue';
+import ToastContainer from '@/components/ToastContainer.vue';
 import { useStores, type StoreItem } from '@/composables/useStores';
 import { useSyncStore } from '@/composables/useSyncStore';
 import { useToast } from '@/composables/useToast';
+import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 

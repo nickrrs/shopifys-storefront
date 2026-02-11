@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
 import { Pencil, Loader2 } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
+import { Button } from '@/components/ui/button';
 import {
     Dialog,
     DialogContent,
@@ -9,12 +10,11 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useUpdateStore } from '@/composables/useUpdateStore';
-import { useToast } from '@/composables/useToast';
 import type { StoreItem } from '@/composables/useStores';
+import { useToast } from '@/composables/useToast';
+import { useUpdateStore } from '@/composables/useUpdateStore';
 
 type Props = {
     store: StoreItem | null;

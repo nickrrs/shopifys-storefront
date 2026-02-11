@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Head, Link, useForm, router } from '@inertiajs/vue3';
 import { Store, Eye, EyeOff, ArrowRight } from 'lucide-vue-next';
+import { ref } from 'vue';
 import ToastContainer from '@/components/ToastContainer.vue';
 import { useAuthLogin } from '@/composables/useAuthLogin';
 import { useToast } from '@/composables/useToast';
