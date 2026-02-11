@@ -2,15 +2,15 @@
 
 namespace App\Services\Shopify;
 
+use App\Contracts\IntegrationClient;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-use RuntimeException;
 
 class ShopifyStoreConnector
 {
-    public function connect(User $user, string $name, string $shopifyDomain, string $accessToken): Store
+    public function connect(User $user, string $name, string $shopifyDomain, string $accessToken, IntegrationClient $client): Store
     {
         Log::info('ShopifyStoreConnector: connecting store.', [
             'user_id' => $user->id,
@@ -21,8 +21,6 @@ class ShopifyStoreConnector
             'shopify_domain' => $shopifyDomain,
             'access_token' => $accessToken,
         ]);
-
-        $client = new ShopifyGraphqlClient($store);
 
         $response = $client->request(
             <<<'GRAPHQL'

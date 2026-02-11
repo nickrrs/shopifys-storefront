@@ -4,6 +4,7 @@ namespace App\GraphQL\Mutations\Shopify;
 
 use App\Models\Store;
 use App\Models\User;
+use App\Services\Shopify\ShopifyGraphqlClientFactory;
 use App\Services\Shopify\ShopifyStoreConnector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -11,9 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class ConnectStore
 {
-    public function __construct(protected ShopifyStoreConnector $connector)
-    {
-    }
+    public function __construct(
+        protected ShopifyStoreConnector $connector,
+        protected ShopifyGraphqlClientFactory $clientFactory,
+    ) {}
 
     public function __invoke(null $_, array $args): Store
     {
@@ -34,7 +36,9 @@ class ConnectStore
         }
 
         try {
-            return $this->connector->connect($user, $name, $shopifyDomain, $accessToken);
+            $client = $this->clientFactory->createFromCredentials($shopifyDomain, $accessToken);
+
+            return $this->connector->connect($user, $name, $shopifyDomain, $accessToken, $client);
         } catch (\Throwable $e) {
             Log::error('ConnectStore: failed.', [
                 'user_id' => $user->id,

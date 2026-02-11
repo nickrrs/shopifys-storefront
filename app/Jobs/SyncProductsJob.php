@@ -2,9 +2,11 @@
 
 namespace App\Jobs;
 
+use App\Contracts\IntegrationClient;
+use App\Contracts\ProductMapper;
 use App\Models\Product;
 use App\Models\Store;
-use App\Services\Shopify\ShopifyGraphqlClient;
+use App\Services\Shopify\ShopifyGraphqlClientFactory;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -19,8 +21,7 @@ class SyncProductsJob implements ShouldQueue
 
     public function __construct(
         protected int $storeId,
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {
@@ -54,7 +55,19 @@ class SyncProductsJob implements ShouldQueue
 
     protected function syncProducts(Store $store): int
     {
-        $client = new ShopifyGraphqlClient($store);
+        /** @var ShopifyGraphqlClientFactory $clientFactory */
+        $clientFactory = app(ShopifyGraphqlClientFactory::class);
+
+        /** @var ProductMapper $mapper */
+        $mapper = app(ProductMapper::class);
+
+        $client = $clientFactory->create($store);
+
+        return $this->syncProductsWithClient($store, $client, $mapper);
+    }
+
+    protected function syncProductsWithClient(Store $store, IntegrationClient $client, ProductMapper $mapper): int
+    {
         $cursor = null;
         $hasNextPage = true;
         $totalSynced = 0;
@@ -104,7 +117,7 @@ class SyncProductsJob implements ShouldQueue
                 $node = $edge['node'];
                 $cursor = $edge['cursor'];
 
-                $variant = $node['variants']['edges'][0]['node'] ?? null;
+                $product = $mapper->fromShopifyNode($node);
 
                 Product::updateOrCreate(
                     [
@@ -112,11 +125,12 @@ class SyncProductsJob implements ShouldQueue
                         'shopify_product_id' => $node['id'],
                     ],
                     [
-                        'title' => $node['title'],
-                        'description' => $node['descriptionHtml'] ?? null,
-                        'price' => (float) ($variant['price'] ?? 0),
-                        'inventory_quantity' => $variant['inventoryQuantity'] ?? null,
-                        'status' => strtolower($node['status'] ?? 'draft'),
+                        'store_id' => $store->id,
+                        'title' => $product->title,
+                        'description' => $product->description,
+                        'price' => $product->price,
+                        'inventory_quantity' => $product->inventory_quantity,
+                        'status' => $product->status,
                     ],
                 );
 

@@ -15,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(\App\Services\Shopify\ShopifyGraphqlClientFactory::class);
+        $this->app->bind(\App\Contracts\ProductMapper::class, \App\Services\Shopify\ShopifyProductMapper::class);
     }
 
     /**

@@ -10,12 +10,12 @@ class ShopifyProductMapper implements ProductMapper
     public function toShopifyInput(Product $product): array
     {
         return [
-            'title'       => $product->title,
+            'title' => $product->title,
             'descriptionHtml' => $product->description,
-            'status'      => $product->status === 'active' ? 'ACTIVE' : 'DRAFT',
-            'variants'    => [
+            'status' => $product->status === 'active' ? 'ACTIVE' : 'DRAFT',
+            'variants' => [
                 [
-                    'price'     => (string) $product->price,
+                    'price' => (string) $product->price,
                     'inventoryQuantity' => $product->inventory_quantity ?? 0,
                 ],
             ],
@@ -28,13 +28,11 @@ class ShopifyProductMapper implements ProductMapper
         $variantNode = $edges[0]['node'] ?? null;
 
         return new Product([
-            'title'              => $productNode['title'] ?? '',
-            'description'        => $productNode['description'] ?? null,
-            'price'              => isset($variantNode['price']) ? (float) $variantNode['price'] : 0.0,
-            'currency'           => 'USD',
-            'inventory_quantity' => $productNode['totalInventory'] ?? null,
-            'status'             => ($productNode['status'] ?? 'DRAFT') === 'ACTIVE' ? 'active' : 'draft',
+            'title' => $productNode['title'] ?? '',
+            'description' => $productNode['descriptionHtml'] ?? $productNode['description'] ?? null,
+            'price' => isset($variantNode['price']) ? (float) $variantNode['price'] : 0.0,
+            'inventory_quantity' => $variantNode['inventoryQuantity'] ?? $productNode['totalInventory'] ?? null,
+            'status' => ($productNode['status'] ?? 'DRAFT') === 'ACTIVE' ? 'active' : 'draft',
         ]);
     }
 }
-
